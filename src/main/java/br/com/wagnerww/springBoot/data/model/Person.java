@@ -1,4 +1,4 @@
-package br.com.wagnerww.springBoot.model;
+package br.com.wagnerww.springBoot.data.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,12 +25,7 @@ public class Person implements Serializable {
     @Column(nullable = false, length = 6)
     private String gender;
 
-    public Person(Long id, String firstName, String lastName, String address, String gender) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.gender = gender;
+    public Person() {
     }
 
     public Long getId() {

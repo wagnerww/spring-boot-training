@@ -1,14 +1,12 @@
 package br.com.wagnerww.springBoot.services;
 
 import br.com.wagnerww.springBoot.exception.ResourceNotFoundException;
-import br.com.wagnerww.springBoot.model.Person;
+import br.com.wagnerww.springBoot.data.model.Person;
 import br.com.wagnerww.springBoot.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class PersonService {
