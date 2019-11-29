@@ -1,6 +1,5 @@
 package br.com.wagnerww.springBoot.converter;
 
-import com.github.dozermapper.core.DozerBeanMapper;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
 
@@ -17,7 +16,7 @@ public class DozerConverter {
     public static <O, D> List<D> paseListObjects(List<O> origin, Class<D> destination){
         List<D> destinatiationObject = new ArrayList<D>();
         for (Object o : origin) {
-            destinatiationObject.add(mapper.map(origin, destination));
+            destinatiationObject.add(mapper.map(o, destination));
         }
 
         return destinatiationObject;

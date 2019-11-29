@@ -1,5 +1,7 @@
 package br.com.wagnerww.springBoot.services;
 
+import br.com.wagnerww.springBoot.converter.DozerConverter;
+import br.com.wagnerww.springBoot.data.vo.PersonVO;
 import br.com.wagnerww.springBoot.exception.ResourceNotFoundException;
 import br.com.wagnerww.springBoot.data.model.Person;
 import br.com.wagnerww.springBoot.repository.PersonRepository;
@@ -14,19 +16,22 @@ public class PersonService {
     @Autowired
     PersonRepository repository;
 
-    public Person create(Person person) {
-        return repository.save(person);
+    public PersonVO create(PersonVO person) {
+        var entity = DozerConverter.paseObject(person, Person.class);
+        var vo = DozerConverter.paseObject(repository.save(entity), PersonVO.class);
+        return vo;
     }
 
-    public Person update(Person person) {
-        Person entity = repository.findById(person.getId()).orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
+    public PersonVO update(PersonVO person) {
+        var entity = repository.findById(person.getId()).orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
 
         entity.setFirstName(person.getFirstName());
         entity.setLastName(person.getLastName());
         entity.setAddress(person.getAddress());
         entity.setGender(person.getGender());
 
-        return repository.save(entity);
+        var vo = repository.save(entity);
+        return DozerConverter.paseObject(vo, PersonVO.class);
     }
 
     public void delete(Long id) {
@@ -34,12 +39,17 @@ public class PersonService {
         repository.delete(entity);
     }
 
-    public Person findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
+    public PersonVO findById(Long id) {
+
+        var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
+        return DozerConverter.paseObject(entity, PersonVO.class);
     }
 
-    public List<Person> findAll() {
-        return repository.findAll();
+    public List<PersonVO> findAll() {
+        var list = repository.findAll();
+
+        return DozerConverter .paseListObjects(list, PersonVO.class);
+
     }
 
 

@@ -2,6 +2,9 @@ package br.com.wagnerww.springBoot.converter;
 
 import java.util.List;
 
+import br.com.wagnerww.springBoot.data.model.Person;
+import br.com.wagnerww.springBoot.data.vo.PersonVO;
+import br.com.wagnerww.springBoot.mocks.MockPerson;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +20,7 @@ public class DozerConverterTest {
 
     @Test
     public void parseEntityToVOTest() {
-        PersonVO output = DozerConverter.parseObject(inputObject.mockEntity(), PersonVO.class);
+        PersonVO output = DozerConverter.paseObject(inputObject.mockEntity(), PersonVO.class);
         Assert.assertEquals(Long.valueOf(0L), output.getId());
         Assert.assertEquals("First Name Test0", output.getFirstName());
         Assert.assertEquals("Last Name Test0", output.getLastName());
@@ -27,7 +30,7 @@ public class DozerConverterTest {
 
     @Test
     public void parseEntityListToVOListTest() {
-        List<PersonVO> outputList = DozerConverter.parseListObjects(inputObject.mockEntityList(), PersonVO.class);
+        List<PersonVO> outputList = DozerConverter.paseListObjects(inputObject.mockEntityList(), PersonVO.class);
         PersonVO outputZero = outputList.get(0);
 
         Assert.assertEquals(Long.valueOf(0L), outputZero.getId());
@@ -55,7 +58,7 @@ public class DozerConverterTest {
 
     @Test
     public void parseVOToEntityTest() {
-        Person output = DozerConverter.parseObject(inputObject.mockVO(), Person.class);
+        Person output = DozerConverter.paseObject(inputObject.mockVO(), Person.class);
         Assert.assertEquals(Long.valueOf(0L), output.getId());
         Assert.assertEquals("First Name Test0", output.getFirstName());
         Assert.assertEquals("Last Name Test0", output.getLastName());
@@ -65,7 +68,7 @@ public class DozerConverterTest {
 
     @Test
     public void parserVOListToEntityListTest() {
-        List<Person> outputList = DozerConverter.parseListObjects(inputObject.mockVOList(), Person.class);
+        List<Person> outputList = DozerConverter.paseListObjects(inputObject.mockVOList(), Person.class);
         Person outputZero = outputList.get(0);
 
         Assert.assertEquals(Long.valueOf(0L), outputZero.getId());
