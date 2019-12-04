@@ -1,7 +1,9 @@
 package br.com.wagnerww.springBoot.services;
 
 import br.com.wagnerww.springBoot.converter.DozerConverter;
+import br.com.wagnerww.springBoot.converter.custom.PersonConverter;
 import br.com.wagnerww.springBoot.data.vo.PersonVO;
+import br.com.wagnerww.springBoot.data.vo.v2.PersonVOV2;
 import br.com.wagnerww.springBoot.exception.ResourceNotFoundException;
 import br.com.wagnerww.springBoot.data.model.Person;
 import br.com.wagnerww.springBoot.repository.PersonRepository;
@@ -16,9 +18,18 @@ public class PersonService {
     @Autowired
     PersonRepository repository;
 
+    @Autowired
+    PersonConverter converter;
+
     public PersonVO create(PersonVO person) {
         var entity = DozerConverter.paseObject(person, Person.class);
         var vo = DozerConverter.paseObject(repository.save(entity), PersonVO.class);
+        return vo;
+    }
+
+    public PersonVOV2 createV2(PersonVOV2 person) {
+        var entity = converter.converterVOToEntity(person);
+        var vo = converter.converterEntityToVO(repository.save(entity));
         return vo;
     }
 

@@ -1,32 +1,21 @@
-package br.com.wagnerww.springBoot.data.vo;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+package br.com.wagnerww.springBoot.data.vo.v2;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
-// Ordem dos campos
-@JsonPropertyOrder({"id", "address", "first_name", "last_name", "gender"})
-public class PersonVO implements Serializable {
+public class PersonVOV2 implements Serializable {
     private static  final long serialVersionUID = 1L;
 
     private Long id;
 
-    //Novo nome das colunas
-    @JsonProperty("first_name")
     private String firstName;
-
-    //Novo nome das colunas
-    @JsonProperty("last_name")
     private String lastName;
     private String address;
-
-    @JsonIgnore
     private String gender;
+    private Date birthday;
 
-    public PersonVO() {
+    public PersonVOV2() {
     }
 
     public Long getId() {
@@ -69,20 +58,29 @@ public class PersonVO implements Serializable {
         this.gender = gender;
     }
 
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PersonVO)) return false;
-        PersonVO personVO = (PersonVO) o;
-        return Objects.equals(id, personVO.id) &&
-                Objects.equals(firstName, personVO.firstName) &&
-                Objects.equals(lastName, personVO.lastName) &&
-                Objects.equals(address, personVO.address) &&
-                Objects.equals(gender, personVO.gender);
+        if (!(o instanceof PersonVOV2)) return false;
+        PersonVOV2 that = (PersonVOV2) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(firstName, that.firstName) &&
+                Objects.equals(lastName, that.lastName) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(gender, that.gender) &&
+                Objects.equals(birthday, that.birthday);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, gender);
+        return Objects.hash(id, firstName, lastName, address, gender, birthday);
     }
 }
