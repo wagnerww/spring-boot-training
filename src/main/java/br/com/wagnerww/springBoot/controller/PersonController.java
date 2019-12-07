@@ -16,7 +16,7 @@ public class PersonController {
     @Autowired
     private PersonService services;
 
-    @GetMapping(produces = {"application/json", "application/xml"})
+    @GetMapping(produces = {"application/json", "application/xml", "application/x-yaml"})
     public List<PersonVO> findAll() {
         return services.findAll();
     }
